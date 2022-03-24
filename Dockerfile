@@ -22,4 +22,4 @@ USER dnmonster
 
 EXPOSE 8080
 
-CMD [ "npm", "start" ]
+CMD [ "npm", "run" , "start" ]
