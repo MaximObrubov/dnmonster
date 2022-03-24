@@ -1,19 +1,22 @@
 "use strict";
 
 var seedrandom = require('seedrandom');
-var Canvas = require('canvas');
+const { createCanvas, loadImage } = require('canvas')
+
 
 exports.getAvatar = function(seed, width, height, theme) {
     //check width and height
     theme = typeof theme !== 'undefined' ? theme : 'default';
 
-    // Seed RNG. 
+    // Seed RNG.
     // WARNING: Hashing is left to caller
     var rng = seedrandom(seed);
 
     var widthHeight = Math.max(width, height);
     widthHeight = Math.max(widthHeight, 12);
-    var canvas = new Canvas(widthHeight, widthHeight);
+    const canvas = createCanvas(widthHeight, widthHeight)
+    // Create avatar.
+    var avatar = canvas.getContext('2d');
 
     // Avatar random parts.
     var parts = {
@@ -24,9 +27,6 @@ exports.getAvatar = function(seed, width, height, theme) {
         eyes : availableParts[theme].eyes[Math.floor(rng() * availableParts[theme].eyes.length)],
         mouth: availableParts[theme].mouth[Math.floor(rng() * availableParts[theme].mouth.length)]
     };
-
-    // Create avatar.
-    var avatar = canvas.getContext('2d');
 
     // Choose a random color
     function gencol() { return (Math.floor(rng() * 200) + 55); }
@@ -71,7 +71,7 @@ exports.getAvatar = function(seed, width, height, theme) {
         default: {
             legs:
                 [
-                    
+
                     [
                         [0,0,0,0,0,0,0,0,0,0,0,0],
                         [0,0,0,0,0,0,0,0,0,0,0,0],
@@ -215,7 +215,7 @@ exports.getAvatar = function(seed, width, height, theme) {
                 ],
             hair:
                 [
-                    
+
                     [
                         [0,0,0,0,0,0,0,0,0,0,0,0],
                         [0,0,0,1,1,0,0,1,1,0,0,0],
@@ -359,7 +359,7 @@ exports.getAvatar = function(seed, width, height, theme) {
                 ],
             arms:
                 [
-                    
+
                     [
                         [0,0,0,0,0,0,0,0,0,0,0,0],
                         [0,0,0,0,0,0,0,0,0,0,0,0],
@@ -503,7 +503,7 @@ exports.getAvatar = function(seed, width, height, theme) {
                 ],
             body:
                 [
-                    
+
                     [
                         [0,0,0,0,0,0,0,0,0,0,0,0],
                         [0,0,0,0,0,0,0,0,0,0,0,0],
@@ -647,7 +647,7 @@ exports.getAvatar = function(seed, width, height, theme) {
                 ],
             eyes:
                 [
-                    
+
                     [
                         [0,0,0,0,0,0,0,0,0,0,0,0],
                         [0,0,0,0,0,0,0,0,0,0,0,0],
@@ -763,7 +763,7 @@ exports.getAvatar = function(seed, width, height, theme) {
                 ],
             mouth:
                 [
-                    
+
                     [
                         [0,0,0,0,0,0,0,0,0,0,0,0],
                         [0,0,0,0,0,0,0,0,0,0,0,0],

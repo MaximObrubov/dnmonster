@@ -4,13 +4,15 @@
   "description": "Node server for KevinGaudin's monsterids",
   "main": "./src/server.js",
   "dependencies": {
-    "restify": "~2.8.4",
-    "canvas": "~1.1.6",
-    "seedrandom": "~2.3.11"
+
+    "restify": "~8.6.1",
+    "canvas": "~2.9.1",
+    "seedrandom": "~3.0.0"
   },
   "devDependencies": {
   },
   "scripts": {
+    "start": "node ./src/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Adrian Mouat",

@@ -10,22 +10,18 @@ var monster = require('./monsterid.js');
  *       short strings, invalid URLs, sizes)
  *       ***NOT correctly 404ing currently***
  */
-var DEFAULT_SIZE = 20;
+const  DEFAULT_SIZE = 20;
+
 function respond(req, res, next) {
+  let width = DEFAULT_SIZE;
+  let height = DEFAULT_SIZE;
 
-  var width = DEFAULT_SIZE;
-  var height = DEFAULT_SIZE;
-
-  if (req.params.size) {
-      width = req.params.size;
-      height = req.params.size;
+  if (req.query?.size) {
+    width = req.query.size;
+    height = req.query.size;
   }
-  if (req.params.width) {
-      width = req.params.width;
-  }
-  if (req.params.height) {
-      height = req.params.height;
-  }
+  if (req.query?.width) width = req.query.width;
+  if (req.query?.height) height = req.query.height;
 
   var img = monster.getAvatar(req.params.name, width, height);
   res.setHeader('Content-Type', 'image/png');
@@ -38,7 +34,7 @@ var server = restify.createServer({
         'image/png': function formatPng(req, res, body) {
             if (body instanceof Error) {
                 return body.stack;
-            } 
+            }
             //Just send the bytes - should be a Buffer
             return body;
         }
@@ -47,7 +43,7 @@ var server = restify.createServer({
 
 });
 
-server.use(restify.queryParser());
+server.use(restify.plugins.queryParser());
 server.get('/monster/:name', respond);
 
 server.listen(8080, function() {
