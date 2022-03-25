@@ -1,0 +1,6 @@
+services:
+  dnmonster:
+    build: .
+    container_name: dnmonster_container
+    ports:
+      - "8080:8080"
